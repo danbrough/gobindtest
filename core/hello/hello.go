@@ -1,14 +1,14 @@
 package hello
 
 import (
-	"Java/java/lang/System"
+	//"Java/java/lang/System"
 	"time"
 )
 
 //export Test
 func Test(data []int8) {
-	t := System.CurrentTimeMillis()
-	println("T is", t)
+	//	t := System.CurrentTimeMillis()
+	//println("T is", t)
 	for _, b := range data {
 		println("B is", b)
 	}
