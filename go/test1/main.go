@@ -6,5 +6,5 @@ import (
 
 func main() {
   s := hello.GetMessage()
-  println("The message is", s)
+  println("The message is::", s)
 }
