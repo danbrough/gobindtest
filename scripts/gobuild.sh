@@ -3,7 +3,7 @@
 cd $(dirname $0) && cd ..
 ROOTDIR=$(pwd)
 BUILDDIR=$ROOTDIR/lib/build/go
-PACKAGES=github.com/danbrough/gobindtest/core/hello
+PACKAGES=github.com/danbrough/gobindtest/core/misc
 #GOBIND="go run golang.org/x/mobile/cmd/gobind"
 
 

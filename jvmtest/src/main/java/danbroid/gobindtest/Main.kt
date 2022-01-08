@@ -1,6 +1,6 @@
 package danbroid.gobindtest
 
-import go.bindtest.hello.Hello
+import go.bindtest.misc.Misc
 
 
 class Main {
@@ -13,8 +13,9 @@ class Main {
 
     @JvmStatic
     fun main(args: Array<String>) {
-      log.info("running main")
-      val msg = Hello.getMessage()
+      log.debug("running main")
+
+      val msg = Misc.getMessage()
       log.info("THe message is $msg")
     }
   }

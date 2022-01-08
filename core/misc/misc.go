@@ -1,4 +1,4 @@
-package hello
+package misc
 
 import (
   //"Java/java/lang/System"
@@ -9,8 +9,7 @@ type name struct {
   Name string
 }
 
-//export Test
-func Test(data []int8) {
+func test(data []int8) {
   //	t := System.CurrentTimeMillis()
   //println("T is", t)
   for _, b := range data {
@@ -24,7 +23,7 @@ func Test2(data []byte) {
   for i, b := range data {
     data2[i] = int8(b)
   }
-  Test(data2)
+  test(data2)
 }
 
 func GetMessage() string {
