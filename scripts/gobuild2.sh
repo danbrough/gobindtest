@@ -16,10 +16,7 @@ rm -rf $BUILDDIR
 mkdir -p $BUILDDIR
 #$GOMOBILE bind -work -x -v  -target=linux  $PACKAGES | tee ./build/go/build.log
 cd $BUILDDIR
-export CGO_ENABLED=1
-export JAVA_HOME=$ROOTDIR/javahome
-export CGO_CFLAGS="-I$JAVA_HOME/include -I$JAVA_HOME/include/linux"
-export CGO_LDFLAGS="-fPIC"
+
 $GOBIND -lang=go,java -outdir=work $PACKAGES || exit 1
 
 export WORK=$BUILDDIR/work
@@ -30,7 +27,11 @@ cd $WORK/src
 #export CC_FOR_TARGET=aarch64-linux-gnu-gcc
 
 unsetAll(){
-  unset GOARCH GOARM CC
+  unset GOARCH GOARM CC CFLAGS
+  export CGO_ENABLED=1
+  export JAVA_HOME=$ROOTDIR/javahome/linux
+  export CGO_CFLAGS="-I$JAVA_HOME/include -I$JAVA_HOME/include/linux"
+  export CGO_LDFLAGS="-fPIC"
 }
 
 build(){
@@ -41,13 +42,13 @@ build_arm64() {
   unsetAll
   export GOARCH=arm64
   export CC=aarch64-linux-gnu-gcc
-  build $GOARCH
+  build jni/$GOARCH
 }
 
 build_amd64() {
   unsetAll
   export GOARCH=amd64
-  build $GOARCH
+  build jni/$GOARCH
 }
 
 build_windows() {
@@ -58,14 +59,15 @@ build_windows() {
   export CC=/usr/bin/x86_64-w64-mingw32-gcc
   export CXX=/usr/bin/x86_64-w64-mingw32-c++
   OPENSSL_LIBS=/home/dan/workspace/android/ipfs_mobile/build/libs/openssl/win32/
-  JAVA_WIN32=/home/dan/workspace/android/ipfs_mobile/docker/ipfsmobile/root/home/kipfs/win32_amd64_jdk
-  export CGO_CFLAGS="-fPIC -static -I$OPENSSL_LIBS/include -I$JAVA_WIN32/include -I$JAVA_WIN32/include/win32"
+  export JAVA_HOME=$ROOTDIR/javahome/win32
+  export CGO_CFLAGS="-fPIC -static -I$OPENSSL_LIBS/include -I$JAVA_HOME/include -I$JAVA_HOME/include/win32"
   export CGO_LDFLAGS="-static -fPIC -L/usr/x86_64-w64-mingw32/lib/ -L$OPENSSL_LIBS/lib -lcrypto -lcrypt32  -lpthread -lws2_32 "
 
-  build win32
+  build jni/win32
 }
 
-build_windows
-#build_amd64
+
+build_amd64
 #build_arm64
+#build_windows
 
