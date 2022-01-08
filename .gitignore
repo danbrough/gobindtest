@@ -2,3 +2,5 @@
 .gradle
 **/build
 /libs
+/kotlin-js-store
+/lint.xml

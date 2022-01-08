@@ -2,25 +2,29 @@
 
 cd $(dirname $0) && cd ..
 ROOTDIR=$(pwd)
-BUILDDIR=$ROOTDIR/build/go
+BUILDDIR=$ROOTDIR/lib/build/go
 PACKAGES=github.com/danbrough/gobindtest/core/hello
 #GOBIND="go run golang.org/x/mobile/cmd/gobind"
-GOBIND="go run github.com/danbrough/mobile/cmd/gobind"
+
+
 #GOBIND=gobind
 #GOMOBILE="go run golang.org/x/mobile/cmd/gomobile"
 #GOMOBILE="go run github.com/danbrough/mobile/cmd/gomobile"
 #GOMOBILE=gomobile
 #$GOBIND  -javapkg=go.gobindtest -lang=java,go -outdir=build/go $PACKAGES
 
+GOBIND="go run github.com/danbrough/mobile/cmd/gobind"
+export WORK=$BUILDDIR/work
+export ANDROID_SDK_ROOT=/mnt/files/sdk/android
+export JSRC=$ROOTDIR/lib/src/jvmMain/java
+
 rm -rf $BUILDDIR
 mkdir -p $BUILDDIR
 #$GOMOBILE bind -work -x -v  -target=linux  $PACKAGES | tee ./build/go/build.log
 cd $BUILDDIR
 
-$GOBIND -lang=go,java -outdir=work $PACKAGES || exit 1
+$GOBIND -javapkg=go.bindtest -lang=go,java -outdir=work $PACKAGES || exit 1
 
-export WORK=$BUILDDIR/work
-export ANDROID_SDK_ROOT=/mnt/files/sdk/android
 
 cd $WORK/src
 
@@ -35,7 +39,7 @@ unsetAll(){
 }
 
 build(){
-  go build -v -x -work -buildmode=c-shared -o=$ROOTDIR/libs/$1/$2 ./gobind
+  go build -v -x -work -buildmode=c-shared -o=$ROOTDIR/lib/build/libs/$1/$2 ./gobind
 }
 
 build_arm64() {
@@ -65,8 +69,13 @@ build_windows() {
   build jni/win32 libgojni.dll 
 }
 
+copy_java(){
+  rm -rf $JSRC/go
+  cp -a $WORK/java/go $JSRC/
+}
 
 build_amd64
-build_arm64
-build_windows
+#build_arm64
+#build_windows
 
+copy_java

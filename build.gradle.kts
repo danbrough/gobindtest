@@ -1,53 +1,66 @@
-plugins {
-  kotlin("multiplatform")
-}
+buildscript {
 
-group = "com.github.danbrough"
-version = "1.0-SNAPSHOT"
 
-repositories {
-  mavenCentral()
-}
-
-kotlin {
-  jvm {
-    compilations.all {
-      kotlinOptions.jvmTarget = "1.8"
-    }
-    withJava()
-    testRuns["test"].executionTask.configure {
-      useJUnitPlatform()
-    }
+  repositories {
+    google()
+    mavenCentral()
+    gradlePluginPortal()
   }
-  js(BOTH) {
-    browser {
-      commonWebpackConfig {
-        cssSupport.enabled = true
+
+  dependencies {
+    classpath("com.android.tools.build:gradle:_")
+    classpath("org.jetbrains.kotlin:kotlin-gradle-plugin:_")
+  }
+}
+
+apply("project.gradle.kts")
+
+
+
+allprojects {
+  repositories {
+
+
+    google()
+    mavenCentral()
+
+    maven(ProjectVersions.MAVEN_REPO)
+    maven("https://h1.danbrough.org/maven")
+
+  }
+
+  tasks {
+    withType<org.jetbrains.kotlin.gradle.tasks.KotlinCompile>() {
+      kotlinOptions {
+        jvmTarget = ProjectVersions.KOTLIN_JVM_VERSION
       }
     }
-  }
-  val hostOs = System.getProperty("os.name")
-  val isMingwX64 = hostOs.startsWith("Windows")
-  val nativeTarget = when {
-    hostOs == "Mac OS X" -> macosX64("native")
-    hostOs == "Linux" -> linuxX64("native")
-    isMingwX64 -> mingwX64("native")
-    else -> throw GradleException("Host OS is not supported in Kotlin/Native.")
-  }
 
-
-  sourceSets {
-    val commonMain by getting
-    val commonTest by getting {
-      dependencies {
-        implementation(kotlin("test"))
-      }
+    withType<JavaCompile>() {
+      sourceCompatibility = ProjectVersions.JAVA_VERSION.toString()
+      targetCompatibility = ProjectVersions.JAVA_VERSION.toString()
     }
-    val jvmMain by getting
-    val jvmTest by getting
-    val jsMain by getting
-    val jsTest by getting
-    val nativeMain by getting
-    val nativeTest by getting
+
+    withType<Test> {
+      useJUnit()
+
+      testLogging {
+        events("standardOut", "started", "passed", "skipped", "failed")
+        showStandardStreams = true
+        /*    outputs.upToDateWhen {
+              false
+            }*/
+        exceptionFormat = org.gradle.api.tasks.testing.logging.TestExceptionFormat.FULL
+      }
+      project.properties.keys.forEach { key ->
+        if (key.startsWith("IPFS_")) {
+          val value = project.property(key).toString()
+          systemProperty(key, value)
+          //environment(key, value)
+        }
+      }
+      environment("PROJECT_DIR", file("."))
+    }
   }
 }
+
