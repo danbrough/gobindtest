@@ -5,6 +5,10 @@ import (
 	"time"
 )
 
+type name struct {
+	Name string
+}
+
 //export Test
 func Test(data []int8) {
 	//	t := System.CurrentTimeMillis()
