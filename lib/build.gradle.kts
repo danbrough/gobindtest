@@ -10,6 +10,16 @@ repositories {
   maven("https://h1.danbrough.org/maven")
 }
 
+/*
+    iosX64("ios"){
+        compilations["main"].cinterops {
+            firebasecore {
+                packageName 'cocoapods.FirebaseCore'
+                defFile = file("$projectDir/src/iosMain/c_interop/FirebaseCore.def")
+                includeDirs ("$projectDir/../iosApp/Pods/FirebaseCore/Firebase/Core/Public")
+                compilerOpts ("-F$projectDir/src/iosMain/c_interop/modules/FirebaseCore-${versions.firebaseCoreIos}")
+            }
+ */
 kotlin {
   jvm {
     compilations.all {
@@ -20,6 +30,7 @@ kotlin {
       useJUnitPlatform()
     }
   }
+/*
   js(BOTH) {
     browser {
       commonWebpackConfig {
@@ -27,6 +38,9 @@ kotlin {
       }
     }
   }
+*/
+
+/*
   val hostOs = System.getProperty("os.name")
   val isMingwX64 = hostOs.startsWith("Windows")
   val nativeTarget = when {
@@ -35,12 +49,26 @@ kotlin {
     isMingwX64 -> mingwX64("native")
     else -> throw GradleException("Host OS is not supported in Kotlin/Native.")
   }
+*/
 
+  linuxX64 {
+    compilations["main"].apply {
+      cinterops {
+        this.create("gojni"){
+          defFile = project.file("gojni.def")
+        }
+        /*this.gojni {
+          defFile project.file("gojni.def")
+        }*/
+      }
+    }
+  }
 
   sourceSets {
-    val commonMain by getting{
+    val commonMain by getting {
       dependencies {
         implementation(AndroidUtils.logging)
+
       }
     }
     val commonTest by getting {
@@ -48,11 +76,21 @@ kotlin {
         implementation(kotlin("test"))
       }
     }
-    val jvmMain by getting
-    val jvmTest by getting
+    val jvmMain by getting{
+      dependencies{
+      }
+    }
+   /* val jvmTest by getting
     val jsMain by getting
-    val jsTest by getting
-    val nativeMain by getting
-    val nativeTest by getting
+    val jsTest by getting*/
+    val nativeMain by creating {
+      dependencies {
+      }
+    }
+    val nativeTest by creating
+
+    val linuxX64Main by getting {
+      dependsOn(nativeMain)
+    }
   }
 }

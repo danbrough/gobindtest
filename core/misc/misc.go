@@ -5,8 +5,8 @@ import (
   "time"
 )
 
-type name struct {
-  Name string
+type Printer interface {
+  Print(msg string)
 }
 
 func test(data []int8) {
@@ -24,6 +24,11 @@ func Test2(data []byte) {
     data2[i] = int8(b)
   }
   test(data2)
+}
+
+func TestPrinter(printer Printer) {
+  msg := GetMessage()
+  printer.Print("Printing message: " + msg)
 }
 
 func GetMessage() string {

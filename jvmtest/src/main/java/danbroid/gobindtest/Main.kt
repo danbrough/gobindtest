@@ -1,6 +1,7 @@
 package danbroid.gobindtest
 
 import go.bindtest.misc.Misc
+import go.bindtest.misc.Printer
 
 
 class Main {
@@ -17,6 +18,11 @@ class Main {
 
       val msg = Misc.getMessage()
       log.info("THe message is $msg")
+
+      val printer = Printer{
+        log.warn("DOING PRINT: $it")
+      }
+      Misc.testPrinter(printer)
     }
   }
 }
