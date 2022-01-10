@@ -54,7 +54,7 @@ kotlin {
   linuxX64 {
     compilations["main"].apply {
       cinterops {
-        this.create("gojni"){
+        this.create("gojni") {
           defFile = project.file("src/nativeInterop/cinterop/gobind.def")
           packageName = "gobind"
           //headers = rootProject.files("test1")
@@ -83,13 +83,13 @@ kotlin {
         implementation(kotlin("test"))
       }
     }
-    val jvmMain by getting{
-      dependencies{
+    val jvmMain by getting {
+      dependencies {
       }
     }
-   /* val jvmTest by getting
-    val jsMain by getting
-    val jsTest by getting*/
+    /* val jvmTest by getting
+     val jsMain by getting
+     val jsTest by getting*/
     val nativeMain by creating {
       dependencies {
       }

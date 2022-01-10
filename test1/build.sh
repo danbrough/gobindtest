@@ -2,4 +2,9 @@
 
 cd `dirname $0` 
 
-go build -buildmode=c-archive -o libgojni.a github.com/danbrough/gobindtest/test1 
+PACKAGES="github.com/danbrough/gobindtest/test1 github.com/danbrough/gobindtest/misc"
+
+
+go build -buildmode=c-archive -o libgobindtest.a github.com/danbrough/gobindtest/test1
+
+
