@@ -12,17 +12,16 @@ source scripts/common.sh
 #GOMOBILE=gomobile
 #$GOBIND  -javapkg=go.gobindtest -lang=java,go -outdir=build/go $PACKAGES
 
-GOBIND="go run github.com/danbrough/mobile/cmd/gobind"
-export WORK=$BUILDDIR/work
-export ANDROID_SDK_ROOT=/mnt/files/sdk/android
-export JSRC=$ROOTDIR/lib/src/jvmMain/java
+BUILDDIR=$ROOTDIR/lib/build/go
+WORK=$BUILDDIR/work
+JSRC=$ROOTDIR/lib/src/jvmMain/java
 
 rm -rf $BUILDDIR
 mkdir -p $BUILDDIR
 #$GOMOBILE bind -work -x -v  -target=linux  $PACKAGES | tee ./build/go/build.log
 cd $BUILDDIR
 
-$GOBIND -javapkg=go.bindtest -lang=go,java -outdir=work $PACKAGES || exit 1
+$GOBIND -javapkg=go.bindtest -lang=go,java -outdir=work -tags=jvm $PACKAGES || exit 1
 
 
 cd $WORK/src
@@ -38,7 +37,7 @@ unsetAll(){
 }
 
 build(){
-  go build -v -x -work -buildmode=c-shared -o=$ROOTDIR/lib/build/libs/$1/$2 ./gobind
+  go build -v -x -work -buildmode=c-archive -o=$ROOTDIR/lib/build/libs/$1/$2 ./gobind
 }
 
 build_arm64() {
@@ -51,7 +50,7 @@ build_arm64() {
 build_amd64() {
   unsetAll
   export GOARCH=amd64
-  build jni/$GOARCH libgojni.so
+  build jni/$GOARCH libgojni.a
 }
 
 build_windows() {

@@ -1,0 +1,10 @@
+
+
+headers = libgojni.h
+staticLibraries = libgojni.a
+#libraryPaths = /home/dan/workspace/gobindtest/lib/build/go_native/amd64
+libraryPaths =  /home/dan/workspace/go/src/github.com/danbrough/gobindtest/test1
+
+compilerOpts.linux = -I/usr/include -I/home/dan/workspace/go/src/github.com/danbrough/gobindtest/test1
+linkerOpts.linux =  -Lgojni
+

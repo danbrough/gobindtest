@@ -1,9 +1,6 @@
 package misc
 
-import (
-  //"Java/java/lang/System"
-  "time"
-)
+import "time"
 
 type Printer interface {
   Print(msg string)

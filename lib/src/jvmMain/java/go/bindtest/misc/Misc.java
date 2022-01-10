@@ -36,6 +36,9 @@ public abstract class Misc {
 	}
 	
 	
+	/**
+	 * export GetMessage
+	 */
 	public static native String getMessage();
 	public static native void test2(byte[] data);
 	public static native void testPrinter(Printer printer);

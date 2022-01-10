@@ -55,11 +55,18 @@ kotlin {
     compilations["main"].apply {
       cinterops {
         this.create("gojni"){
-          defFile = project.file("gojni.def")
+          defFile = project.file("src/nativeInterop/cinterop/gobind.def")
+          packageName = "gobind"
+          //headers = rootProject.files("test1")
         }
         /*this.gojni {
           defFile project.file("gojni.def")
         }*/
+      }
+    }
+    binaries {
+      executable {
+        entryPoint = "main"
       }
     }
   }
