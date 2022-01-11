@@ -56,8 +56,7 @@ kotlin {
       cinterops {
         create("gobind") {
           packageName = "gobind"
-          linkerOpts("-L${rootProject.file("test1")}")
-          includeDirs(rootProject.file("test1"))
+          includeDirs(rootProject.file("go/test1"))
         //  extraOpts("-libraryPath", "${rootProject.file("test1")}")
         }
       }

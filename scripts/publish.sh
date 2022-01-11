@@ -42,8 +42,8 @@ git add .
 git commit -am "$VERSION_NAME"
 git tag "$VERSION_NAME" && git push && git push origin "$VERSION_NAME"
 
-echo running GOPROXY=proxy.golang.org go list -m  github.com/danbrough/gobindtest@$VERSION_NAME
-GOPROXY=proxy.golang.org go list -m  github.com/danbrough/gobindtest@$VERSION_NAME
+echo running GOPROXY=proxy.golang.org go list -m  github.com/danbrough/gobindtest/go@$VERSION_NAME
+GOPROXY=proxy.golang.org go list -m  github.com/danbrough/gobindtest/go@$VERSION_NAME
 
 
 
