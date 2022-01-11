@@ -1,4 +1,4 @@
-module github.com/danbrough/gobindtest/go
+module github.com/danbrough/gobindtest
 
 go 1.17
 

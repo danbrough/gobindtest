@@ -5,8 +5,8 @@ package main
 */
 import "C"
 import (
-	"github.com/danbrough/gobindtest/go/cids"
-	"github.com/danbrough/gobindtest/go/misc"
+	"github.com/danbrough/gobindtest/cids"
+	"github.com/danbrough/gobindtest/misc"
 	ipfsapi "github.com/ipfs/go-ipfs-api"
 	"unsafe"
 )
