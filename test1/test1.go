@@ -57,6 +57,13 @@ func IPFS_ID() *C.char {
   return C.CString(s.ID)
 }
 
+//export Request
+func Request(command *C.char) C.{
+  if shell == nil {
+    return nil
+  }
+}
+
 func main() {
 
   const json = `
