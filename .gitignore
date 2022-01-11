@@ -5,3 +5,4 @@
 /kotlin-js-store
 /lint.xml
 /stuff
+**/*.hprof

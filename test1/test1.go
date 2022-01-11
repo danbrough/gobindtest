@@ -13,19 +13,18 @@ import (
 
 var shell *ipfsapi.Shell
 
-//export GetMessage
-func GetMessage() *C.char {
+//export kGetMessage
+func kGetMessage() *C.char {
 	return C.CString(misc.GetMessage())
 }
 
-//export CID
-func CID(json *C.char) *C.char {
-	s := C.GoString(json)
-	return C.CString(cids.DagCid(s))
+//export kCID
+func kCID(json *C.char) *C.char {
+	return C.CString(cids.DagCid(C.GoString(json)))
 }
 
-//export CreateShell
-func CreateShell(url *C.char) {
+//export kCreateShell
+func kCreateShell(url *C.char) {
 	if shell == nil {
 		println("creating shell...")
 		shell = ipfsapi.NewShell(C.GoString(url))
@@ -34,8 +33,8 @@ func CreateShell(url *C.char) {
 	}
 }
 
-//export IPFS_ID
-func IPFS_ID() *C.char {
+//export kIpfsID
+func kIpfsID() *C.char {
 	if shell == nil {
 		return nil
 	}
@@ -47,15 +46,15 @@ func IPFS_ID() *C.char {
 	return C.CString(s.ID)
 }
 
-//export Free
-func Free(s *C.void) {
+//export kFree
+func kFree(s *C.void) {
 	if s != nil {
 		C.free(unsafe.Pointer(s))
 	}
 }
 
-//export Request
-func Request(command *C.char) {
+//export kRequest
+func kRequest(command *C.char) {
 	if shell == nil {
 		return
 	}
