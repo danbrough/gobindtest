@@ -74,7 +74,7 @@ copy_java(){
 }
 
 build_amd64
-#build_arm64
-#build_windows
+build_arm64
+build_windows
 
 copy_java

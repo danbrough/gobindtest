@@ -71,7 +71,7 @@ kotlin {
     }
   }
 
-  linuxArm64 {
+/*  linuxArm64 {
     compilations["main"].apply {
       cinterops {
         this.create("gobind") {
@@ -79,9 +79,9 @@ kotlin {
           packageName = "gobind"
           //headers = rootProject.files("test1")
         }
-        /*this.gojni {
+        *//*this.gojni {
           defFile project.file("gojni.def")
-        }*/
+        }*//*
       }
     }
     binaries {
@@ -89,13 +89,12 @@ kotlin {
         entryPoint = "main"
       }
     }
-  }
+  }*/
 
   sourceSets {
     val commonMain by getting {
       dependencies {
         implementation(AndroidUtils.logging)
-
       }
     }
     val commonTest by getting {
@@ -111,17 +110,15 @@ kotlin {
      val jsMain by getting
      val jsTest by getting*/
     val nativeMain by creating {
-      dependencies {
-      }
+      dependsOn(commonMain)
     }
+
     val nativeTest by creating
 
     val linuxX64Main by getting {
       dependsOn(nativeMain)
     }
 
-    val linuxArm64Main by getting {
-      dependsOn(nativeMain)
-    }
+
   }
 }

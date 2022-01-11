@@ -16,6 +16,8 @@ fun main() {
   log.info("CID: $cid")
 
 
+
+
   val cFunctionPointer = staticCFunction<Int, Int> { it + 1 }
   accept_fun(cFunctionPointer)
   log.trace("done that bit")
