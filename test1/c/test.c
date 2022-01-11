@@ -8,7 +8,7 @@ int main(void){
 	printf("The message is %s\n",s);
 	printf("CID: %s\n",CID("\"Hello World\""));
 	CreateShell("/ip4/192.168.1.4/tcp/5001");
-	printf("The ID is %s\n",ID());
+	printf("The ID is %s\n",IPFS_ID());
 	return 0;
 }
 
