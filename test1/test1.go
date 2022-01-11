@@ -1,26 +1,19 @@
 package main
+/*
+#include "gobind.h"
 
-//int myFun2(int i) {
-//return i+10;
-//}
-//
-//typedef int  (*MyFun2)(int);
-//
-//void accept_fun(MyFun2 f) {
-//int c = f(42);
-//printf("OK %d\n",c);
-//}
-//
-//MyFun2 supply_fun2() {
-//return myFun2;
-//}
 
+*/
+import "C"
 import (
-  "C"
   "github.com/danbrough/gobindtest/cids"
   "github.com/danbrough/gobindtest/misc"
-  ipfsapi "github.com/ipfs/go-ipfs-api"
+  "unsafe"
+    ipfsapi "github.com/ipfs/go-ipfs-api"
+
 )
+
+
 
 var shell *ipfsapi.Shell
 
@@ -50,6 +43,7 @@ func IPFS_ID() *C.char {
   if shell == nil {
     return nil
   }
+
   s, err := shell.ID()
   if err != nil {
     return C.CString(err.Error())
@@ -57,10 +51,17 @@ func IPFS_ID() *C.char {
   return C.CString(s.ID)
 }
 
+//export Free
+func Free(s *C.void) {
+  if s != nil {
+  C.free(unsafe.Pointer(s))
+  }
+}
+
 //export Request
-func Request(command *C.char) C.{
+func Request(command *C.char)  {
   if shell == nil {
-    return nil
+    return
   }
 }
 

@@ -5,7 +5,7 @@ staticLibraries = libgobindtest.a
 #libraryPaths = /home/dan/workspace/gobindtest/lib/build/go_native/amd64
 libraryPaths =  /home/dan/workspace/go/src/github.com/danbrough/gobindtest/test1
 
-compilerOpts.linux = -I/usr/include -I/home/dan/workspace/go/src/github.com/danbrough/gobindtest/test1 -D_REENTRANT -I/usr/include -D_POSIX_SOURCE
+compilerOpts.linux = -D_REENTRANT -I/usr/include -D_POSIX_SOURCE
 linkerOpts.linux =-lpthread
 
 ---

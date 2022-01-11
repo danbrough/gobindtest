@@ -1,21 +1,16 @@
 import gobind.accept_fun
 import gobind.supply_fun
-import kotlinx.cinterop.cstr
-import kotlinx.cinterop.invoke
-import kotlinx.cinterop.staticCFunction
-import kotlinx.cinterop.toKString
+import kotlinx.cinterop.*
 
 private val log = danbroid.logging.configure("TEST", coloured = true)
 
 fun main() {
-  val msg = gobind.GetMessage()?.toKString();
-  log.warn("msg: $msg")
+
+  log.warn("msg: ${gobind.GetMessage().copyToString()}")
+
 
   val json = "\"Hello World\""
-  val cid = gobind.CID(json.cstr)?.toKString()
-  log.info("CID: $cid")
-
-
+  log.info("CID: ${gobind.CID(json.cstr).copyToString()}")
 
 
   val cFunctionPointer = staticCFunction<Int, Int> { it + 1 }
@@ -30,8 +25,19 @@ fun main() {
 
   gobind.CreateShell("/ip4/192.168.1.4/tcp/5001".cstr)
 
-  log.info("IPFS ID: ${gobind.IPFS_ID()?.toKString()}")
+  log.info(
+    "IPFS ID: ${
+      gobind.IPFS_ID().copyToString()
+    }"
+  )
 
 
   log.debug("finished")
 }
+
+fun CPointer<ByteVar>?.copyToString(): String =
+  if (this != null) {
+    val s = this.toKString()
+    gobind.Free(this)
+    s
+  } else "null"

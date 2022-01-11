@@ -54,14 +54,12 @@ kotlin {
   linuxX64 {
     compilations["main"].apply {
       cinterops {
-        this.create("gobind") {
-          defFile = project.file("src/linuxX64Main/gobind.def")
+        create("gobind") {
           packageName = "gobind"
-          //headers = rootProject.files("test1")
+          linkerOpts("-L${rootProject.file("test1")}")
+          includeDirs(rootProject.file("test1"))
+        //  extraOpts("-libraryPath", "${rootProject.file("test1")}")
         }
-        /*this.gojni {
-          defFile project.file("gojni.def")
-        }*/
       }
     }
     binaries {
