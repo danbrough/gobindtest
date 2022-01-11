@@ -54,8 +54,28 @@ kotlin {
   linuxX64 {
     compilations["main"].apply {
       cinterops {
-        this.create("gojni") {
-          defFile = project.file("src/nativeInterop/cinterop/gobind.def")
+        this.create("gobind") {
+          defFile = project.file("src/linuxX64Main/gobind.def")
+          packageName = "gobind"
+          //headers = rootProject.files("test1")
+        }
+        /*this.gojni {
+          defFile project.file("gojni.def")
+        }*/
+      }
+    }
+    binaries {
+      executable {
+        entryPoint = "main"
+      }
+    }
+  }
+
+  linuxArm64 {
+    compilations["main"].apply {
+      cinterops {
+        this.create("gobind") {
+          defFile = project.file("src/linuxArm64Main/gobind.def")
           packageName = "gobind"
           //headers = rootProject.files("test1")
         }
@@ -97,6 +117,10 @@ kotlin {
     val nativeTest by creating
 
     val linuxX64Main by getting {
+      dependsOn(nativeMain)
+    }
+
+    val linuxArm64Main by getting {
       dependsOn(nativeMain)
     }
   }
