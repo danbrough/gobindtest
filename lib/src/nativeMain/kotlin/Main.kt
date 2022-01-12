@@ -6,11 +6,11 @@ private val log = danbroid.logging.configure("TEST", coloured = true)
 
 fun main() {
 
-  log.warn("msg: ${gobind.kGetMessage().copyToString()}")
+  log.warn("msg: ${gobind.KGetMessage().copyToString()}")
 
 
   val json = "\"Hello World\""
-  log.info("CID: ${gobind.kCID(json.cstr).copyToString()}")
+  log.info("CID: ${gobind.KCID(json.cstr).copyToString()}")
 
 
   val cFunctionPointer = staticCFunction<Int, Int> { it + 1 }
@@ -23,14 +23,9 @@ fun main() {
     log.trace("funFromC = $it")
   }
 
-  gobind.kCreateShell("/ip4/192.168.1.4/tcp/5001".cstr)
+  gobind.KCreateShell("/ip4/192.168.1.4/tcp/5001".cstr)
 
-  log.info(
-    "IPFS ID: ${
-      gobind.kIpfsID().copyToString()
-    }"
-  )
-
+  log.info("IPFS ID: ${gobind.KIpfsID().copyToString()}")
 
   log.debug("finished")
 }
@@ -38,6 +33,6 @@ fun main() {
 fun CPointer<ByteVar>?.copyToString(): String =
   if (this != null) {
     val s = this.toKString()
-    gobind.kFree(this)
+    gobind.KFree(this)
     s
   } else "null"
