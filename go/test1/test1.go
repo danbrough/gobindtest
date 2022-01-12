@@ -8,10 +8,12 @@ import (
 	"github.com/danbrough/gobindtest/cids"
 	"github.com/danbrough/gobindtest/misc"
 	ipfsapi "github.com/ipfs/go-ipfs-api"
+	ipfsrepo "github.com/ipfs/go-ipfs/repo"
 	"unsafe"
 )
 
 var shell *ipfsapi.Shell
+var repo ipfsrepo.Repo
 
 //export kGetMessage
 func kGetMessage() *C.char {

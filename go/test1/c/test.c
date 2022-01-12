@@ -3,18 +3,16 @@
 #include <stdio.h>
 
 int main(void){
-	printf("Hello Wolrd\n");
-	char *s = GetMessage();
+	char *s = kGetMessage();
 	printf("The message is %s\n",s);
-	Free(s);
-	char *cid = CID("\"Hello World\"");
+	kFree(s);
+	char *cid = kCID("\"Hello World\"");
 	printf("CID: %s\n",cid);
-	Free(cid);
-	CreateShell("/ip4/192.168.1.4/tcp/5001");
+	kFree(cid);
+	kCreateShell("/ip4/192.168.1.4/tcp/5001");
 	char *id = kIpfsID();
 	printf("The ID is %s\n",id);
-	Free(id);
-	Free(NULL);
+	kFree(id);
 	return 0;
 }
 
