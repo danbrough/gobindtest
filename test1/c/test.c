@@ -13,6 +13,15 @@ int main(void){
 	char *id = KIpfsID();
 	printf("The ID is %s\n",id);
 	KFree(id);
+
+	 char * repoDir = "/home/dan/.kipfs_tests/repo";
+
+	if (!KRepoIsInitialized(repoDir)){
+	    printf("Repo at %s is not initialized.\n",repoDir);
+	    KInitRepo(repoDir);
+	}else {
+	    printf("Repo at %s is initialized.\n",repoDir);
+	}
 	return 0;
 }
 
