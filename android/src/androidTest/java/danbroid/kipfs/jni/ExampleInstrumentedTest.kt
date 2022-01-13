@@ -15,10 +15,20 @@ import org.junit.Assert.*
  */
 @RunWith(AndroidJUnit4::class)
 class ExampleInstrumentedTest {
+
+  companion object {
+    val log = danbroid.logging.configure("TEST", coloured = true)
+  }
+
   @Test
-  fun useAppContext() {
+  fun test1() {
     // Context of the app under test.
+    log.info("test1()")
     val appContext = InstrumentationRegistry.getInstrumentation().targetContext
-    assertEquals("danbroid.kipfs.jni.test", appContext.packageName)
+
+    KIPFS.hello().also {
+      log.info("HELLO SAYS: $it")
+    }
+
   }
 }

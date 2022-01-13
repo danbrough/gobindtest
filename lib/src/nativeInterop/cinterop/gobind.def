@@ -4,8 +4,8 @@ headers = libgobindtest.h gobind.h
 staticLibraries = libgobindtest.a
 libraryPaths =  /home/dan/workspace/go/src/github.com/danbrough/gobindtest/test1
 
-compilerOpts.linux = -I/usr/include -D_REENTRANT -I/usr/include -D_POSIX_SOURCE
-linkerOpts.linux =-lpthread
+compilerOpts.linux = -I/usr/include -D_REENTRANT -I/usr/include -D_POSIX_SOURCE -fPIC -pthread -m64 
+linkerOpts.linux =-lpthread -ldl
 
 
 

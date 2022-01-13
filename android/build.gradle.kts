@@ -7,6 +7,13 @@ android {
   compileSdk = 31
   //ndkVersion= "23.0.7599858"
   ndkVersion = "23.1.7779620"
+
+  packagingOptions {
+    jniLibs {
+      excludes += "**libgobindtest.so"
+    }
+  }
+
   defaultConfig {
     minSdk = 21
     targetSdk = 31
@@ -17,6 +24,12 @@ android {
       cmake {
         cppFlags("")
       }
+    }
+
+    ndk {
+      //abiFilters += listOf("x86", "x86_64", "armeabi", "armeabi-v7a", "arm64-v8a")
+      abiFilters += listOf("x86")
+
     }
   }
 
@@ -41,7 +54,6 @@ android {
   }
 
 
-
 }
 
 
@@ -50,6 +62,8 @@ dependencies {
 
   testImplementation(AndroidUtils.logging)
   testImplementation(Testing.junit4)
+  androidTestImplementation(AndroidUtils.logging)
+
   androidTestImplementation("com.android.support.test:runner:_")
   androidTestImplementation("com.android.support.test.espresso:espresso-core:_")
 }

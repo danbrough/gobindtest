@@ -2,9 +2,9 @@
 
 cd `dirname $0` 
 
-LIBNAME=libgobindtest.a
+LIBNAME=libgobindtest.so
 
-export CGO_LDFLAGS="-ldl"
+export CGO_LDFLAGS="-ldl -lpthread"
 go build -buildmode=c-archive -o $LIBNAME .
 #strip $LIBNAME
 
