@@ -8,7 +8,7 @@ if [ -z "$PLATFORM" ]; then
 	echo using default platform $PLATFORM
 fi 
 
-NAME=ipfsmobile
+NAME=gobindtest
 #Place to store cache files
 CACHEDIR=/mnt/files2/cache
 #PLATFORM=$AMD64
