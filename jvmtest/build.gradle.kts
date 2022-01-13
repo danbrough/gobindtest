@@ -7,7 +7,7 @@ dependencies {
   implementation(project(":lib"))
   implementation(AndroidUtils.logging)
   testImplementation(Testing.junit4)
-// testImplementation("com.github.danbrough.ipfs_mobile:libamd64:0.10.0_06")
+// testImplementation("com.github.danbrough.ipfs_mobile:libamd64:_")
 }
 
 
