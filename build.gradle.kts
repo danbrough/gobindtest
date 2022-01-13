@@ -9,7 +9,7 @@ buildscript {
 
   dependencies {
     classpath("com.android.tools.build:gradle:_")
-    classpath("org.jetbrains.kotlin:kotlin-gradle-plugin:_")
+    classpath("org.jetbrains.kotlin:kotlin-gradle-plugin:1.6.10")
   }
 }
 
@@ -43,6 +43,8 @@ allprojects {
 
     withType<Test> {
       useJUnit()
+
+      this.jvmArgs("-Djava.library.path=/home/dan/workspace/go/src/github.com/danbrough/gobindtest/android/build/intermediates/library_and_local_jars_jni/debug/jni/x86_64/")
 
       testLogging {
         events("standardOut", "started", "passed", "skipped", "failed")

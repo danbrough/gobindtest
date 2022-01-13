@@ -6,7 +6,7 @@ plugins {
 android {
   compileSdk = 31
   //ndkVersion= "23.0.7599858"
-  ndkVersion ="23.1.7779620"
+  ndkVersion = "23.1.7779620"
   defaultConfig {
     minSdk = 21
     targetSdk = 31
@@ -39,10 +39,16 @@ android {
   kotlinOptions {
     jvmTarget = "1.8"
   }
+
+
+
 }
+
+
 
 dependencies {
 
+  testImplementation(AndroidUtils.logging)
   testImplementation(Testing.junit4)
   androidTestImplementation("com.android.support.test:runner:_")
   androidTestImplementation("com.android.support.test.espresso:espresso-core:_")

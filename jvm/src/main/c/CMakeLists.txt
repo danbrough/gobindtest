@@ -9,10 +9,21 @@ cmake_minimum_required(VERSION 3.18.1)
 
 project("kipfs")
 
+
+find_package(JNI)
+
+if (JNI_FOUND)
+  message (STATUS "JNI_INCLUDE_DIRS=${JNI_INCLUDE_DIRS}")
+  message (STATUS "JNI_LIBRARIES=${JNI_LIBRARIES}")
+endif()
+
+
+
 # Creates and names a library, sets it as either STATIC
 # or SHARED, and provides the relative paths to its source code.
 # You can define multiple libraries, and CMake builds them for you.
 # Gradle automatically packages shared libraries with your APK.
+
 add_library( # Sets the name of the library.
              kipfs
 
@@ -20,8 +31,7 @@ add_library( # Sets the name of the library.
              SHARED
 
              # Provides a relative path to your source file(s).
-             jni.cpp
-    hello.c)
+         test.c)
 
 # Searches for a specified prebuilt library and stores the path as a
 # variable. Because CMake includes system libraries in the search path by
