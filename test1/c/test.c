@@ -5,14 +5,14 @@
 int main(void){
 	char *s = KGetMessage();
 	printf("The message is %s\n",s);
-	KFree(s);
+	free(s);
 	char *cid = KCID("\"Hello World\"");
 	printf("CID: %s\n",cid);
-	KFree(cid);
+	free(cid);
 	KCreateShell("/ip4/192.168.1.4/tcp/5001");
 	char *id = KIpfsID();
 	printf("The ID is %s\n",id);
-	KFree(id);
+	free(id);
 
 	 char * repoDir = "/home/dan/.kipfs_tests/repo";
 

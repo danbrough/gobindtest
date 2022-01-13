@@ -3,6 +3,7 @@ plugins {
 }
 
 include(":lib")
+include(":jni")
 include(":jvmtest")
 
 rootProject.name = "gobindtest"

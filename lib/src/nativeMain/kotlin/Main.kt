@@ -1,6 +1,10 @@
 import gobind.accept_fun
+import gobind.free
 import gobind.supply_fun
 import kotlinx.cinterop.*
+import platform.posix.getpid
+import platform.posix.sleep
+import platform.posix.usleep
 
 private val log = danbroid.logging.configure("TEST", coloured = true)
 
@@ -27,12 +31,22 @@ fun main() {
 
   log.info("IPFS ID: ${gobind.KIpfsID().copyToString()}")
 
-  log.debug("finished")
+  log.trace("PID: ${getpid()}")
+
+  Platform.isMemoryLeakCheckerActive = true
+  log.warn("debug binary: ${Platform.isDebugBinary} mem leak checker active: ${Platform.isMemoryLeakCheckerActive}")
+
+  sleep(4)
+  var n = 0
+  while (true) {
+    gobind.KBigString(102400)?.copyToString()
+    log.trace("${n++}")
+    usleep(1000)
+  }
 }
 
 fun CPointer<ByteVar>?.copyToString(): String =
-  if (this != null) {
-    val s = this.toKString()
-    gobind.KFree(this)
-    s
-  } else "null"
+  this?.toKString()?.also {
+    //gobind.KFree(this)
+   free(this)
+  } ?: "null"
