@@ -30,6 +30,9 @@ kotlin {
       useJUnitPlatform()
     }
   }
+
+
+
 /*
   js(BOTH) {
     browser {
@@ -57,7 +60,7 @@ kotlin {
         create("gobind") {
           packageName = "gobind"
           includeDirs(rootProject.file("test1"))
-        //  extraOpts("-libraryPath", "${rootProject.file("test1")}")
+          //  extraOpts("-libraryPath", "${rootProject.file("test1")}")
         }
       }
     }

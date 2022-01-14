@@ -8,5 +8,5 @@ include(":jvmtest")
 
 rootProject.name = "gobindtest"
 
-include(":android")
+//include(":android")
 include(":jvm")

@@ -1,0 +1,1 @@
+/usr/bin/cc -fPIC -shared -Wl,-soname,libkipfs.so -o libkipfs.so CMakeFiles/kipfs.dir/test.c.o  -Wl,-rpath,/home/dan/workspace/go/src/github.com/danbrough/gobindtest/test1 /home/dan/workspace/go/src/github.com/danbrough/gobindtest/test1/libgobindtest.so 

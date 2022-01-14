@@ -11,8 +11,6 @@ project("kipfs")
 
 set(IMPORT_DIR ${CMAKE_SOURCE_DIR}/../jniLibs/${CMAKE_ANDROID_ARCH_ABI})
 include_directories(${IMPORT_DIR})
-message(STATUS "MY_VARIAsssssssssssssssssssssssssssssssssssssssssBLE=${IMPORT_DIR}/libgobindtest.so")
-
 
 
 # Creates and names a library, sets it as either STATIC

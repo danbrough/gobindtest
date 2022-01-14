@@ -9,7 +9,6 @@ cmake_minimum_required(VERSION 3.18.1)
 
 project("kipfs")
 
-
 find_package(JNI)
 
 if (JNI_FOUND)
@@ -17,7 +16,9 @@ if (JNI_FOUND)
   message (STATUS "JNI_LIBRARIES=${JNI_LIBRARIES}")
 endif()
 
+include_directories(${JNI_INCLUDE_DIRS})
 
+include_directories(${CMAKE_SOURCE_DIR}/../../../../test1/)
 
 # Creates and names a library, sets it as either STATIC
 # or SHARED, and provides the relative paths to its source code.
@@ -31,7 +32,12 @@ add_library( # Sets the name of the library.
              SHARED
 
              # Provides a relative path to your source file(s).
-         test.c)
+         test.c
+         )
+
+
+add_library(gobindtest SHARED IMPORTED)
+set_property(TARGET gobindtest PROPERTY IMPORTED_LOCATION /home/dan/workspace/go/src/github.com/danbrough/gobindtest/test1/libgobindtest.so)
 
 # Searches for a specified prebuilt library and stores the path as a
 # variable. Because CMake includes system libraries in the search path by
@@ -49,6 +55,11 @@ add_library( # Sets the name of the library.
 # Specifies libraries CMake should link to your target library. You
 # can link multiple libraries, such as libraries you define in this
 # build script, prebuilt third-party libraries, or system libraries.
+
+target_link_libraries(
+kipfs
+gobindtest
+)
 
 #target_link_libraries( # Specifies the target library.
 #    kipfs
