@@ -1,3 +1,0 @@
-/home/dan/workspace/go/src/github.com/danbrough/gobindtest/android/src/main/cpp/CMakeFiles/kipfs.dir
-/home/dan/workspace/go/src/github.com/danbrough/gobindtest/android/src/main/cpp/CMakeFiles/edit_cache.dir
-/home/dan/workspace/go/src/github.com/danbrough/gobindtest/android/src/main/cpp/CMakeFiles/rebuild_cache.dir
