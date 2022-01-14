@@ -9,7 +9,7 @@ cmake_minimum_required(VERSION 3.18.1)
 
 project("kipfs")
 
-set(IMPORT_DIR ${CMAKE_SOURCE_DIR}/../jniLibs/${CMAKE_ANDROID_ARCH_ABI})
+set(IMPORT_DIR ${CMAKE_SOURCE_DIR}/../libs/${CMAKE_ANDROID_ARCH_ABI})
 include_directories(${IMPORT_DIR})
 
 
@@ -28,10 +28,10 @@ add_library( # Sets the name of the library.
             hello.c
             )
 
-add_library(gobindtest SHARED IMPORTED )
-set_property(TARGET gobindtest PROPERTY IMPORTED_LOCATION ${IMPORT_DIR}/libgobindtest.so)
+add_library(gojni SHARED IMPORTED )
+set_property(TARGET gojni PROPERTY IMPORTED_LOCATION ${IMPORT_DIR}/libgojni.so)
 
-target_link_libraries(kipfs gobindtest)
+target_link_libraries(kipfs gojni)
 
 # Searches for a specified prebuilt library and stores the path as a
 # variable. Because CMake includes system libraries in the search path by

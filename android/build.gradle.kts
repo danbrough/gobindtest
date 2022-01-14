@@ -10,7 +10,7 @@ android {
 
   packagingOptions {
     jniLibs {
-      excludes += "**libgobindtest.so"
+     // excludes += "**libgojni.so"
     }
   }
 
