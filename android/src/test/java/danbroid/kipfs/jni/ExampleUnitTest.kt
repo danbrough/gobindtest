@@ -23,5 +23,9 @@ class ExampleUnitTest {
     KIPFS.hello().also {
       println("Hello returned $it")
     }
+
+    KIPFS.CID("\"Hello World\"").also {
+      println("CID: $it")
+    }
   }
 }

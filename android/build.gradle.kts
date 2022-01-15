@@ -8,11 +8,13 @@ android {
   //ndkVersion= "23.0.7599858"
   ndkVersion = "23.1.7779620"
 
+/*
   packagingOptions {
     jniLibs {
      // excludes += "**libgojni.so"
     }
   }
+*/
 
   defaultConfig {
     minSdk = 21
@@ -26,11 +28,11 @@ android {
       }
     }
 
-    ndk {
+/*    ndk {
       //abiFilters += listOf("x86", "x86_64", "armeabi", "armeabi-v7a", "arm64-v8a")
       abiFilters += listOf("x86")
 
-    }
+    }*/
   }
 
   buildTypes {
@@ -41,7 +43,7 @@ android {
   }
   externalNativeBuild {
     cmake {
-      path("src/main/cpp/CMakeLists.txt")
+     // path("src/main/cpp/CMakeLists.txt")
       //version = "3.18.1"
     }
   }

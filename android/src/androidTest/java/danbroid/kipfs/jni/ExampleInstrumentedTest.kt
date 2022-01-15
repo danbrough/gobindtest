@@ -30,5 +30,8 @@ class ExampleInstrumentedTest {
       log.info("HELLO SAYS: $it")
     }
 
+    KIPFS.dagCid("\"Hello World\"").also {
+      log.debug("CID: $it")
+    }
   }
 }
