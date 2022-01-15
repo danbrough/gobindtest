@@ -3,6 +3,7 @@ module github.com/danbrough/gobindtest
 go 1.17
 
 require (
+	github.com/danbrough/mobile v0.0.2
 	github.com/ipfs/go-cid v0.1.0
 	github.com/ipfs/go-datastore v0.5.1
 	github.com/ipfs/go-ipfs v0.11.0
@@ -39,7 +40,6 @@ require (
 	github.com/cheggaaa/pb v1.0.29 // indirect
 	github.com/crackcomm/go-gitignore v0.0.0-20170627025303-887ab5e44cc3 // indirect
 	github.com/cskr/pubsub v1.0.2 // indirect
-	github.com/danbrough/mobile v0.0.2 // indirect
 	github.com/davidlazar/go-crypto v0.0.0-20200604182044-b73af7476f6c // indirect
 	github.com/dgraph-io/badger v1.6.2 // indirect
 	github.com/dgraph-io/ristretto v0.0.2 // indirect
