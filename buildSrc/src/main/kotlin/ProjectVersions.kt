@@ -17,7 +17,7 @@ object ProjectVersions {
   var VERSION_OFFSET = 1
   lateinit var MAVEN_REPO: String
 
-  var GROUP_ID = "com.github.danbrough.ipfs_mobile"
+  var GROUP_ID = "com.github.danbrough.kipfs"
 
   val VERSION_NAME: String
     get() = getVersionName()

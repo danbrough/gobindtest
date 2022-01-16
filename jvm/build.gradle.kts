@@ -14,7 +14,9 @@ java {
 }
 
 dependencies {
-  implementation(AndroidUtils.logging)
+  testImplementation(AndroidUtils.logging)
+  testImplementation("com.github.danbrough.kipfs:linuxAmd64:_")
+  testImplementation(Testing.junit4)
 }
 
 

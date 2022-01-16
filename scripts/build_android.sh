@@ -17,10 +17,11 @@ build_env(){
 
 build(){
   go mod tidy
-  echo building $1
+  echo
+  echo '#####' building $1
   go tool cgo -exportheader test1/libkipfs.h test1/*.go
   go build -tags openssl -v -ldflags -w  -buildmode=c-shared \
-  -o=android/src/main/jniLibs/$1/libgojni.so ./test1
+  -o=android/src/main/jniLibs/$1/libkipfs.so ./test1
 }
 
 build_386(){

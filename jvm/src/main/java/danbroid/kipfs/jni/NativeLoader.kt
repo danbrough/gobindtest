@@ -6,7 +6,6 @@ import java.nio.file.Files
 import java.util.*
 
 object NativeLoader {
-  private val log = danbroid.logging.getLog(this::class)
 
   @Suppress("UnsafeDynamicallyLoadedCode")
   fun loadLibrary(classLoader: ClassLoader, libName: String = "kipfs") {
@@ -14,16 +13,14 @@ object NativeLoader {
       System.loadLibrary(libName)
     } catch (ex: UnsatisfiedLinkError) {
       val fullLibName = libFilename(libName)
-      log.trace("NativeLoader!: trying classLoader.getResource($fullLibName)")
       val url = classLoader.getResource(fullLibName)
+        ?: throw UnsatisfiedLinkError("Failed to locate $libName")
 
-      log.trace("NativeLoader: url is $url")
       try {
         val file = Files.createTempFile("jni", libFilename(nameOnly(libName))).toFile()
         file.deleteOnExit()
         file.delete()
-        assert(url != null)
-        url!!.openStream().use { `in` -> Files.copy(`in`, file.toPath()) }
+        url.openStream().use { `in` -> Files.copy(`in`, file.toPath()) }
         System.load(file.canonicalPath)
       } catch (e: IOException) {
         throw UncheckedIOException(e)

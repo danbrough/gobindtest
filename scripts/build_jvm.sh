@@ -18,6 +18,21 @@ build_linux(){
     -o=$SRCDIR/jvm/libs/$ARCH/libkipfs.so ./test1
 }
 
+build_linux_arm64(){
+    ./openssl/linux_arm64.sh
+  export GOOS=linux
+  export GOARCH=arm64
+  export GOARM=7
+  export ARCH=arm64
+  export CC=aarch64-linux-gnu-gcc
+  export CXX=aarch64-linux-gnu-g++
+  export CGO_CFLAGS="$CGO_CFLAGS -I$SRCDIR/openssl/libs/linux/arm64/include"
+  export CGO_LDFLAGS="$CGO_LDFLAGS -L$SRCDIR/openssl/libs/linux/arm64/lib"
+
+  go tool cgo -exportheader test1/libkipfs.h test1/*.go
+  go build -tags openssl  -v -ldflags -w -buildmode=c-shared \
+    -o=$SRCDIR/jvm/libs/$ARCH/libkipfs.so ./test1
+}
 
 build_win32(){
   ./openssl/win32.sh
@@ -35,10 +50,10 @@ build_win32(){
   go build -tags openssl  -x -v -ldflags -w -buildmode=c-shared \
     -o=$SRCDIR/jvm/libs/win32/libkipfs.dll ./test1
 }
-build_linux
 
-if [  "$ARCH" == "amd64" ]; then
-  build_win32
-fi
+build_linux
+build_linux_arm64
+build_win32
+
 
 
