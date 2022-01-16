@@ -3,7 +3,6 @@ module github.com/danbrough/gobindtest
 go 1.17
 
 require (
-	github.com/danbrough/mobile v0.0.2
 	github.com/ipfs/go-cid v0.1.0
 	github.com/ipfs/go-datastore v0.5.1
 	github.com/ipfs/go-ipfs v0.11.0
@@ -242,4 +241,4 @@ require (
 	lukechampine.com/blake3 v1.1.6 // indirect
 )
 
-//replace 	github.com/danbrough/mobile  => /home/dan/workspace/go/src/github.com/danbrough/mobile
+//replace github.com/danbrough/mobile => /home/dan/workspace/go/src/github.com/danbrough/mobile

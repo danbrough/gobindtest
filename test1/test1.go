@@ -1,7 +1,7 @@
 package main
 
 /*
-#cgo LDFLAGS: -L. -ldl
+#cgo linux LDFLAGS: -L. -ldl
 #include <stdlib.h>
 */
 import "C"

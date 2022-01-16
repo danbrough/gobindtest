@@ -1,6 +1,6 @@
 #include <jni.h>
 
-#include "libgobindtest.h"
+#include "libkipfs.h"
 #include <jni.h>
 
 JNIEXPORT jstring JNICALL

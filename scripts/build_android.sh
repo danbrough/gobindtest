@@ -3,6 +3,7 @@
 cd $(dirname $0) && cd ..
 source scripts/common.sh
 
+rm -rf android/src/main/jniLibs
 
 build_env(){
   export GOOS=android
