@@ -33,9 +33,10 @@ build_win32(){
   go build -tags openssl  -x -v -ldflags -w -buildmode=c-shared \
     -o=$SRCDIR/jvm/libs/win32/libkipfs.dll ./test1
 }
+build_linux
 
 if [  "$ARCH" == "amd64" ]; then
   build_win32
 fi
 
-build_linux
+
