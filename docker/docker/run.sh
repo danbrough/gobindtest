@@ -16,9 +16,13 @@ CACHEDIR=/mnt/files2/cache
 
 echo running `realpath setup.sh` in $image
 
+[ ! -d $CACHEDIR/$ARCH ] && mkdir $CACHEDIR/$ARCH
+
+
+
 docker run -it --name "${NAME}_${PLATFORM}"  -h ${NAME}_${PLATFORM} \
 	-v `realpath ../..`:/home/kipfs/src \
-	-v $CACHEDIR:/cache -v /tmp:/tmp \
+	-v $CACHEDIR:/cache -v /tmp:/tmp -v $CACHEDIR/$PLATFORM/$ARCH:/home/kipfs/.cache \
 	--platform=linux/$PLATFORM \
 	danbrough/ipfsmobile:latest  \
 	bash 

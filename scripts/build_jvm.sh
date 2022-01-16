@@ -12,7 +12,7 @@ export CGO_ENABLED=1
 export CGO_LDFLAGS="-ldl -lpthread -fPIC"
 export CGO_CFLAGS="-I${JAVA_HOME}/include -I${JAVA_HOME}/include/linux -fPIC"
 
-build_amd64(){
+build_linux(){
   go build -tags openssl  -v -ldflags -w -buildmode=c-shared \
     -o=$SRCDIR/jvm/libs/$ARCH/libkipfs.so ./test1
 }
@@ -37,4 +37,4 @@ if [  "$ARCH" == "amd64" ]; then
   build_win32
 fi
 
-
+build_linux 
