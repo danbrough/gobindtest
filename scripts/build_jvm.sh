@@ -13,6 +13,7 @@ export CGO_LDFLAGS="-ldl -lpthread -fPIC"
 export CGO_CFLAGS="-I${JAVA_HOME}/include -I${JAVA_HOME}/include/linux -fPIC"
 
 build_linux(){
+  go tool cgo -exportheader test1/libkipfs.h test1/*.go
   go build -tags openssl  -v -ldflags -w -buildmode=c-shared \
     -o=$SRCDIR/jvm/libs/$ARCH/libkipfs.so ./test1
 }
@@ -29,6 +30,7 @@ build_win32(){
   export CXX=x86_64-w64-mingw32-c++
   export CGO_CFLAGS="-fPIC -static -I$OPENSSL_LIBS/include -I${JAVA_HOME}/include -I${JAVA_HOME}/include/win32 "
   export CGO_LDFLAGS="-static -fPIC -L/usr/x86_64-w64-mingw32/lib/ -L$OPENSSL_LIBS/lib -lcrypto -lcrypt32  -lpthread -lws2_32 "
+  go tool cgo -exportheader test1/libkipfs.h test1/*.go
 
   go build -tags openssl  -x -v -ldflags -w -buildmode=c-shared \
     -o=$SRCDIR/jvm/libs/win32/libkipfs.dll ./test1

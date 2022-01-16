@@ -3,7 +3,7 @@
 cd `dirname $0`
 source common.sh
 
-LIBS=$SCRIPTDIR/libs
+LIBS=$SCRIPTDIR/libs/android
 
 if [ -d $LIBS ]; then
     echo not building openssl as $LIBS exists

@@ -2,22 +2,23 @@
 
 cd $(dirname $0) && cd ..
 source scripts/common.sh
-
+export SRC=`pwd`
 rm -rf android/src/main/jniLibs
 
 build_env(){
   export GOOS=android
   export GOARCH=$1
-  export CC=$ANDROID_HOME/ndk/23.1.7779620/toolchains/llvm/prebuilt/linux-x86_64/bin/$2-clang
-  export CXX=$ANDROID_HOME/ndk/23.1.7779620/toolchains/llvm/prebuilt/linux-x86_64/bin/$2-clang++
+  export CC=$ANDROID_NDK_HOME/toolchains/llvm/prebuilt/linux-x86_64/bin/$2-clang
+  export CXX=$ANDROID_NDK_HOME/toolchains/llvm/prebuilt/linux-x86_64/bin/$2-clang++
   export CGO_ENABLED=1
-  export CGO_CFLAGS="-I/home/dan/workspace/android/ipfs_mobile/openssl/libs/$3/include -fPIC"
-  export CGO_LDFLAGS="-L/home/dan/workspace/android/ipfs_mobile/openssl/libs/$3/lib -landroid -llog"
+  export CGO_CFLAGS="-I$SRC/openssl/libs/android/$3/include -fPIC"
+  export CGO_LDFLAGS="-L$SRC/openssl/libs/android/$3/lib -landroid -llog"
 }
 
 build(){
   go mod tidy
   echo building $1
+  go tool cgo -exportheader test1/libkipfs.h test1/*.go
   go build -tags openssl -v -ldflags -w  -buildmode=c-shared \
   -o=android/src/main/jniLibs/$1/libgojni.so ./test1
 }
