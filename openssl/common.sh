@@ -8,7 +8,7 @@ export SRC=$PWD/src
 #echo SRC: $SRC
 
 export OPENSSL_TAG=OpenSSL_1_1_1m
-export CFLAGS="-Wno-macro-redefined"
+export CFLAGS="-Wno-macro-redefined -DOPENSSL_SMALL_FOOTPRINT=1"
 
 
 if [ -z "$ANDROID_NDK_HOME" ]; then

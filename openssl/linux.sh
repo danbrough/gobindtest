@@ -2,7 +2,9 @@
 
 cd `dirname $0`
 
-export OPENSSL_LIBS=$BUILDDIR/libs/openssl/linux/$ARCH
+source ../scripts/common.sh
+
+export OPENSSL_LIBS=$SCRIPTDIR/libs/linux/$ARCH
 
 if [ -d $OPENSSL_LIBS ]; then
     echo not building openssl as $OPENSSL_LIBS exists
