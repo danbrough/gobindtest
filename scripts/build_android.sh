@@ -11,6 +11,7 @@ build_env(){
   export CC=$ANDROID_NDK_HOME/toolchains/llvm/prebuilt/linux-x86_64/bin/$2-clang
   export CXX=$ANDROID_NDK_HOME/toolchains/llvm/prebuilt/linux-x86_64/bin/$2-clang++
   export CGO_ENABLED=1
+  export PKG_CONFIG_PATH=$SRCDIR/openssl/libs/android/$3/lib/pkgconfig/
   export CGO_CFLAGS="-I$SRCDIR/openssl/libs/android/$3/include -fPIC"
   export CGO_LDFLAGS="-L$SRCDIR/openssl/libs/android/$3/lib -landroid -llog"
 }
@@ -19,6 +20,7 @@ build(){
   go mod tidy
   echo
   echo '#####' building $1
+
   go tool cgo -exportheader test1/libkipfs.h test1/*.go
   go build -tags openssl -v -ldflags -w  -buildmode=c-shared \
   -o=android/src/main/jniLibs/$1/libkipfs.so ./test1
