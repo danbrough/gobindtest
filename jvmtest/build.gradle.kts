@@ -1,10 +1,11 @@
 plugins {
   kotlin("jvm")
-  `maven-publish`
 }
 
 dependencies {
-  implementation(project(":lib"))
+  implementation("com.github.danbrough.kipfs:jvm:_")
+
+  implementation("com.github.danbrough.kipfs:linuxAmd64:_")
   implementation(AndroidUtils.logging)
   testImplementation(Testing.junit4)
 // testImplementation("com.github.danbrough.ipfs_mobile:libamd64:_")
@@ -24,7 +25,7 @@ fun TaskContainerScope.registerDemo(name: String, cls: String) =
     mainClass.set(cls)
     //classpath = files("../jvm/libs/linux/libs/$arch") + sourceSets["main"].runtimeClasspath
     classpath = sourceSets["main"].runtimeClasspath
-    this.jvmArgs=listOf("-Djava.library.path=/home/dan/workspace/gobindtest/lib/build/libs/jni/amd64")
+
     val execTask = this
 
     project.properties.keys.forEach { key ->
@@ -39,18 +40,3 @@ tasks {
 }
 
 
-
-publishing {
-
-  publications {
-    create<MavenPublication>("default") {
-      from(components["java"])
-    }
-  }
-
-
-  repositories {
-    maven(ProjectVersions.MAVEN_REPO)
-  }
-
-}

@@ -39,6 +39,7 @@ val buildWin32 by tasks.registering(Jar::class) {
 
 publishing {
   publications {
+
     create<MavenPublication>("default") {
       from(components["java"])
     }

@@ -7,4 +7,4 @@ include(":lib")
 
 
 include(":android")
-include(":jvm")
+include(":jvm",":jvmtest")
