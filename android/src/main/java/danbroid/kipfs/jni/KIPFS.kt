@@ -7,8 +7,8 @@ class KIPFS {
 
     // Used to load the 'jni' library on application startup.
     init {
-      println("loading gojni")
-      System.loadLibrary("gojni")
+      println("loading kipfs")
+      System.loadLibrary("kipfs")
 /*      println("loading kipfs")
       System.loadLibrary("kipfs")*/
       println("finished loading")
