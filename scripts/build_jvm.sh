@@ -1,6 +1,8 @@
 #!/bin/bash
 
 cd $(dirname $0) && cd ..
+export SRCDIR=$PWD
+
 source docker/env.sh
 
 export GOOS=linux
@@ -57,9 +59,13 @@ build_win32(){
     -o=$SRCDIR/jvm/libs/win32/libkipfs.dll ./test1
 }
 
+if [ -z "$1" ]; then
 build_linux
 build_linux_arm64
 build_win32
+else
+  build_$1
+fi
 
 
 

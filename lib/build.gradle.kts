@@ -71,6 +71,23 @@ kotlin {
     }
   }
 
+  linuxArm64 {
+    compilations["main"].apply {
+      cinterops {
+        create("gobind") {
+          packageName = "gobind"
+          includeDirs(rootProject.file("test1"))
+          //  extraOpts("-libraryPath", "${rootProject.file("test1")}")
+        }
+      }
+    }
+    binaries {
+      executable {
+        entryPoint = "main"
+      }
+    }
+  }
+
 /*  linuxArm64 {
     compilations["main"].apply {
       cinterops {
@@ -116,6 +133,9 @@ kotlin {
     val nativeTest by creating
 
     val linuxX64Main by getting {
+      dependsOn(nativeMain)
+    }
+    val linuxArm64Main by getting {
       dependsOn(nativeMain)
     }
 

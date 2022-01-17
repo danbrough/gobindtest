@@ -36,13 +36,13 @@ fun main() {
   Platform.isMemoryLeakCheckerActive = true
   log.warn("debug binary: ${Platform.isDebugBinary} mem leak checker active: ${Platform.isMemoryLeakCheckerActive}")
 
-  sleep(4)
+/*  sleep(4)
   var n = 0
   while (true) {
     gobind.KBigString(102400)?.copyToString()
     log.trace("${n++}")
     usleep(1000)
-  }
+  }*/
 }
 
 fun CPointer<ByteVar>?.copyToString(): String =

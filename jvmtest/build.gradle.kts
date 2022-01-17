@@ -1,14 +1,33 @@
 plugins {
   kotlin("jvm")
+  application
+  id("com.github.johnrengelman.shadow")
 }
 
+val arch = System.getProperty("os.arch")!!.let {
+  if (it == "aarch64") "arm64" else it
+}
+
+val osName = System.getProperty("os.name")!!.let {
+  if (it.startsWith("Windows")) "win32" else it
+}
+
+application {
+  mainClass.set("danbroid.gobindtest.Main")
+}
 dependencies {
   implementation("com.github.danbrough.kipfs:jvm:_")
 
-  implementation("com.github.danbrough.kipfs:linuxAmd64:_")
+
+  /*if (arch == "arm64")
+    implementation("com.github.danbrough.kipfs:linuxArm64:_")
+  else*/
+    implementation("com.github.danbrough.kipfs:linuxArm64:_")
   implementation(AndroidUtils.logging)
   testImplementation(Testing.junit4)
 // testImplementation("com.github.danbrough.ipfs_mobile:libamd64:_")
+
+
 }
 
 
@@ -40,3 +59,7 @@ tasks {
 }
 
 
+
+shadow {
+
+}

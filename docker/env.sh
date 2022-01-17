@@ -1,5 +1,4 @@
 
-[ -z "$SRCDIR" ] && export SRCDIR=`realpath ~/src`
 
 if [ -z "$GOROOT" ]; then
   export GOROOT=/opt/go
