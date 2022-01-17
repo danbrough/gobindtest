@@ -1,5 +1,4 @@
-FROM danbrough/debian
-RUN apt-get update
+FROM danbrough/debian:latest
 COPY root /
 RUN /setup.sh
 

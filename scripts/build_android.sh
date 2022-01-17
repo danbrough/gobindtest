@@ -1,8 +1,7 @@
 #!/bin/bash
 
 cd $(dirname $0) && cd ..
-source scripts/common.sh
-export SRC=`pwd`
+source docker/env.sh
 rm -rf android/src/main/jniLibs
 
 build_env(){
@@ -11,8 +10,8 @@ build_env(){
   export CC=$ANDROID_NDK_HOME/toolchains/llvm/prebuilt/linux-x86_64/bin/$2-clang
   export CXX=$ANDROID_NDK_HOME/toolchains/llvm/prebuilt/linux-x86_64/bin/$2-clang++
   export CGO_ENABLED=1
-  export CGO_CFLAGS="-I$SRC/openssl/libs/android/$3/include -fPIC"
-  export CGO_LDFLAGS="-L$SRC/openssl/libs/android/$3/lib -landroid -llog"
+  export CGO_CFLAGS="-I$SRCDIR/openssl/libs/android/$3/include -fPIC"
+  export CGO_LDFLAGS="-L$SRCDIR/openssl/libs/android/$3/lib -landroid -llog"
 }
 
 build(){
@@ -46,7 +45,7 @@ build_arm32(){
   build armeabi-v7a
 }
 
-
+./openssl/android.sh 
 build_amd64
 build_386
 build_arm32

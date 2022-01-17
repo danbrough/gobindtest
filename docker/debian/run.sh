@@ -8,7 +8,7 @@ if [ -z "$PLATFORM" ]; then
 	echo using default platform $PLATFORM
 fi 
 
-NAME=gobindtest
+NAME=debian
 #Place to store cache files
 CACHEDIR=/mnt/files2/cache
 #PLATFORM=$AMD64
@@ -24,6 +24,12 @@ docker run -it --name "${NAME}_${PLATFORM}"  -h ${NAME}_${PLATFORM} \
 	-v `realpath ../..`:/home/kipfs/src \
 	-v $CACHEDIR:/cache -v /tmp:/tmp -v $CACHEDIR/$PLATFORM:/home/kipfs/.cache \
 	--platform=linux/$PLATFORM \
-	danbrough/ipfsmobile:latest  \
-	bash 
-	#/home/kipfs/ipfs_mobile/docker/setup.sh
+	danbrough/debian:latest \
+	bash
+
+#docker run -it --name "${NAME}_${PLATFORM}"  -h ${NAME}_${PLATFORM} \
+#	-v `realpath ../..`:/home/kipfs/src \
+#	-v $CACHEDIR:/cache -v /tmp:/tmp -v $CACHEDIR/$PLATFORM:/home/kipfs/.cache \
+#	--platform=linux/$PLATFORM \
+#	danbrough/debian:latest  \
+#	bash 
