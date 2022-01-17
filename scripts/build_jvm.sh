@@ -2,7 +2,6 @@
 
 cd $(dirname $0) && cd ..
 export SRCDIR=$PWD
-
 source docker/env.sh
 
 export GOOS=linux

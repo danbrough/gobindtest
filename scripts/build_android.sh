@@ -1,6 +1,7 @@
 #!/bin/bash
 
 cd $(dirname $0) && cd ..
+export SRCDIR=$PWD
 source docker/env.sh
 rm -rf android/src/main/jniLibs
 
@@ -46,7 +47,12 @@ build_arm32(){
 }
 
 ./openssl/android.sh
-build_amd64
-build_386
-build_arm32
-build_arm64
+
+if [ -z "$1" ]; then
+  build_amd64
+  build_386
+  build_arm32
+  build_arm64
+else
+  build_$1
+fi
