@@ -76,10 +76,6 @@ func KCloseRepo() *C.char {
 func init() {
 	log.SetReportCaller(true)
 	log.SetLevel(log.TraceLevel)
-	log.Info("init()")
-	log.Warn("warning")
-	log.Debug("debug")
-	log.Trace("trace")
 }
 
 const letterBytes = "abcdefghijklmnopqrstuvwxyzABCDEFGHIJKLMNOPQRSTUVWXYZ"

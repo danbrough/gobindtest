@@ -1,6 +1,7 @@
 plugins {
   id("com.android.library")
   id("org.jetbrains.kotlin.android")
+  `maven-publish`
 }
 
 android {
@@ -43,7 +44,7 @@ android {
   }
   externalNativeBuild {
     cmake {
-     // path("src/main/cpp/CMakeLists.txt")
+      // path("src/main/cpp/CMakeLists.txt")
       //version = "3.18.1"
     }
   }
@@ -55,8 +56,34 @@ android {
     jvmTarget = "1.8"
   }
 
+  val sourcesJar by tasks.registering(Jar::class) {
+    archiveClassifier.set("sources")
+    from(sourceSets.getByName("main").java.srcDirs)
+  }
+  afterEvaluate {
 
+    publishing {
+      publications {
+
+        publications {
+          create<MavenPublication>("release") {
+            from(components["release"])
+            artifact(sourcesJar.get())
+            artifactId = "android"
+            groupId = ProjectVersions.GROUP_ID
+            version = ProjectVersions.VERSION_NAME
+          }
+        }
+      }
+
+      repositories {
+        maven(ProjectVersions.MAVEN_REPO)
+      }
+    }
+  }
 }
+
+
 
 
 

@@ -45,7 +45,7 @@ build_arm32(){
   build armeabi-v7a
 }
 
-./openssl/android.sh 
+./openssl/android.sh
 build_amd64
 build_386
 build_arm32

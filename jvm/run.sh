@@ -1,7 +1,7 @@
 #!/bin/bash
 
 cd `dirname $0`  
-source ../scripts/common.sh 
+source ../docker/env.sh
 
 if [ ! -f build/classes/java/main/danbroid/kipfs/jni/KIPFS.class ]; then 
 	../gradlew classes
